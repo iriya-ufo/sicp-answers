@@ -21,9 +21,22 @@
 (pascal-triangle 3 5)
 (pascal-triangle 4 6)
 
+;; n > 1, n
+;;     2, n
+;;     3, n
+;;     ...
+;;     n, n
+(define (n-line-pascal-triangle counter n-line)
+  (cond ((> counter n-line) (newline))
+        ((display (pascal-triangle counter n-line)) (n-line-pascal-triangle (+ counter 1) n-line))))
+
+(n-line-pascal-triangle 1 5)
+
 (define (show-pascal-triangle line)
   (define (show-pascal-triangle-inter line counter)
-    (if (<= line counter)
-        (newline)
-        (show-pascal-triangle-inter line (+ counter 1))))
+    (cond ((<= line counter) (newline))
+          ((display (n-line-pascal-triangle 1 counter))
+           (show-pascal-triangle-inter line (+ counter 1)))))
   (show-pascal-triangle-inter line 0))
+
+(show-pascal-triangle 10)
