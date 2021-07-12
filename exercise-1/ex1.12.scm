@@ -16,22 +16,29 @@
             (pascal-triangle (- x 1) (- y 1))))))
 
 (pascal-triangle 0 0)
-(pascal-triangle 10 1)
-(pascal-triangle 3 3)
-(pascal-triangle 3 5)
-(pascal-triangle 4 6)
+;; => 0
 
-;; n > 1, n
-;;     2, n
-;;     3, n
-;;     ...
-;;     n, n
+(pascal-triangle 10 1)
+;; => 0
+
+(pascal-triangle 3 3)
+;; => 1
+
+(pascal-triangle 3 5)
+;; => 6
+
+(pascal-triangle 4 6)
+;; => 10
+
+;; n 行目のパスカル三角形の要素を出力する
 (define (n-line-pascal-triangle counter n-line)
   (cond ((> counter n-line) (newline))
-        ((display (pascal-triangle counter n-line)) (n-line-pascal-triangle (+ counter 1) n-line))))
+        ((display (pascal-triangle counter n-line)) (display #\space) (n-line-pascal-triangle (+ counter 1) n-line))))
 
 (n-line-pascal-triangle 1 5)
+;; => 1 4 6 4 1
 
+;; 引数分の行数のパスカル三角形の要素を出力する
 (define (show-pascal-triangle line)
   (define (show-pascal-triangle-inter line counter)
     (cond ((<= line counter) (newline))
@@ -40,3 +47,12 @@
   (show-pascal-triangle-inter line 0))
 
 (show-pascal-triangle 10)
+;; => 1
+;; => 1 1
+;; => 1 2 1
+;; => 1 3 3 1
+;; => 1 4 6 4 1
+;; => 1 5 10 10 5 1
+;; => 1 6 15 20 15 6 1
+;; => 1 7 21 35 35 21 7 1
+;; => 1 8 28 56 70 56 28 8 1
