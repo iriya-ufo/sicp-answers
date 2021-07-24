@@ -1,9 +1,3 @@
-;; ex1.27.scm
-
-;; fermat-test-version2
-
-(define (square x) (* x x))
-
 (define (expmod base exp m)
   (cond ((= exp 0) 1)
         ((even? exp)
@@ -13,29 +7,20 @@
          (remainder (* base (expmod base (- exp 1) m))
                     m))))
 
-(define (fermat-test-v2 n)
+(define (fermat-test-with-carmichael n)
   (define (try-it a)
     (= (expmod a n n) a))
-  (define (check a)
-    (if (= a 1)
-        #t
-        (and (try-it a)
-             (check (- a 1)))))
-  (check (- n 1)))
+  (define (all-check a n)
+    (cond ((>= a n) #t)
+          ((try-it a) (all-check (+ a 1) n))
+          (else #f)))
+  (all-check 2 n))
 
-(display "fermat-test-version2")
-(newline)
-(display "Carmichael numbers:")
-(newline)
-(display "561,1105,1729,2465,2821,6601")
-(newline)
-(display (fermat-test-v2 561))
-(display (fermat-test-v2 1105))
-(display (fermat-test-v2 1729))
-(display (fermat-test-v2 2465))
-(display (fermat-test-v2 2821))
-(display (fermat-test-v2 6601))
-(newline)
-
-;; fermat-test をだますかどうか調べるには、random 手続きではなく、
-;; a < n なるすべての a について確かめる必要がある。
+(fermat-test-with-carmichael 9)
+(fermat-test-with-carmichael 17)
+(fermat-test-with-carmichael 561)
+(fermat-test-with-carmichael 1105)
+(fermat-test-with-carmichael 1729)
+(fermat-test-with-carmichael 2465)
+(fermat-test-with-carmichael 2821)
+(fermat-test-with-carmichael 6601)
