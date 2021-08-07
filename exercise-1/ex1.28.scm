@@ -2,13 +2,18 @@
 (use srfi-27)
 
 (define (expmod base exp m)
+  ;; 1の非自明な平方根のチェック
+  (define (non-trivial-sqrt-check x)
+    (cond ((= x 1) 1)        ; 1の自明な平方根
+          ((= x (- m 1)) 1)  ; 1の自明な平方根
+          (else
+           (if (= 1 (remainder (square x) m))
+               0             ; 1の非自明な平方根が見つかったシグナル
+               (remainder (square x) m)))))
   (cond ((= exp 0) 1)
-        ((even? exp)
-	       (remainder (non-trivial-square-check (expmod base (/ exp 2) m))
-		                m))
-	      (else
-	       (remainder (* base (expmod base (- exp 1) m))
-		                m))))
+        ((even? exp) (non-trivial-sqrt-check (expmod base (/ exp 2) m)))
+	      (else (remainder (* base (expmod base (- exp 1) m))
+		                     m))))
 
 (define (miller-rabin-test n)
   (define (try-it a)
@@ -20,14 +25,16 @@
         ((miller-rabin-test n) (fast-prime? n (- times 1)))
         (else #f)))
 
+;; 20回、試行する
 (define (prime? n)
-  (fast-prime? n 10))
+  (fast-prime? n 20))
 
-(prime? 13)
-(prime? 561)
-(prime? 1105)
-(prime? 1729)
-(prime? 2465)
-(prime? 2821)
-(prime? 6601)
-(prime? 341550071728321)
+(prime? 13)   ;; => #t
+(prime? 561)  ;; => #f
+(prime? 1105) ;; => #f
+(prime? 1729) ;; => #f
+(prime? 2465) ;; => #f
+(prime? 2821) ;; => #f
+(prime? 6601) ;; => #f
+
+;; フェルマーテストをだましたカーマイケル数が、ミラーラビンテストはだませなかったことが示された
