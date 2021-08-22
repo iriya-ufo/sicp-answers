@@ -1,22 +1,23 @@
-;; ex1.29.scm
-
-;; Simpson
-
 (define (sum term a next b)
   (if (> a b)
       0
       (+ (term a)
-	 (sum term (next a) next b))))
+         (sum term (next a) next b))))
 
 (define (cube x) (* x x x))
 
-(define (integral f a b n)
+(define (simpson f a b n)
   (define h (/ (- b a) n))
-  (define (g x)
-    (+ (f x) (* 4 (f (+ x h))) (f (+ x (* 2 h)))))
-  (define (add x) (+ x (* 2 h)))
-  (* (/ h 3) 
-     (sum g a add b)))
+  (define (next x)
+    (+ x (* 2 h)))
+  (* (/ h 3)
+     (+ (f a)
+        (* 4 (sum f (+ a h) next b))
+        (* 2 (sum f (+ a (* 2 h)) next (- b h)))
+        (f b))))
 
-(print (integral cube 0 1 100))
-(print (integral cube 0 1 1000))
+(simpson cube 0 1.0 100)
+;; => 0.2500000000000004
+
+(simpson cube 0 1.0 1000)
+;; => 0.25000000000000083
