@@ -1,5 +1,3 @@
-;; ex1.14.scm
-
 (define (count-change amount)
   (cc amount 5))
 
@@ -19,14 +17,12 @@
         ((= kinds-of-coins 4) 25)
         ((= kinds-of-coins 5) 50)))
 
-(define (dis arg)
-  (display (count-change arg))
-  (newline))
+(count-change 11)
+;; => 4
 
-(dis 11)
-(dis 22)
-(dis 44)
-(dis 88)
+;; プロセスを図示する木は以下を参照
+;; https://www.notion.so/1-14-1015ec9a0ce4499aa81fa26f2158b054
 
-;; スペース   Θ(n)
-;; ステップ数 Θ(a^n)
+;; 両替する金額の増加に対する、このプロセスの増加オーダー
+;; ステップ数 Θ (n^5)
+;; 空間 Θ (n)
