@@ -1,26 +1,21 @@
-;; ex1.44.scm
-
 (define (square x) (* x x))
 (define (cube x) (* x x x))
 
-(define dx 0.000001)
+(define dx 0.1)
 
 (define (smooth f)
-  (lambda (x) (/ (+ (f (- x dx)) (f x) (f (+ x dx)))
-		 3)))
-
-
-;; 関数 f の定義
+  (lambda (x) (/ (+ (f (- x dx))
+                    (f x)
+                    (f (+ x dx)))
+                 3)))
 
 (define f square)
-;;(define f cube)
-;;(define f hoge)
+(define f abs)
 
-(print ((smooth f) 3))
-
+((smooth f) 0)
+;; => 0.06666666666666667
 
 ;; n-fold smoothed function
-
 (define (compose f g)
   (lambda (x) (f (g x))))
 
@@ -32,4 +27,5 @@
 (define (n-fold-smooth f n)
   ((repeated smooth n) f))
 
-(print ((n-fold-smooth f 10) 3))
+((n-fold-smooth f 10) 0)
+;; => 0.20477908177953905
