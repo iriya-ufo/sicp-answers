@@ -42,21 +42,28 @@
 (n-root-test 32 5 1)                    ; 1回で収束しない
 (n-root-test 32 5 2)                    ; 2回で収束
 
+;; 6乗根が何回で収束するか調べる
+(n-root-test 64 6 2)                    ; 2回で収束
 
-;; 2回の平均緩和で収束しない
-;; (print (n-root-test 2 8 2)) ;;収束しない
-(n-root-test 3 8 2) ;;収束
+;; 7乗根が何回で収束するか調べる
+(n-root-test 128 7 2)                   ; 2回で収束
 
-;; n = 2^c とすると n 乗根を計算するのに必要な平均緩和の回数は c 回
-(define (n-root n x)
-  (define (damp-count m)
-    (if (< m 2)
-        0
-        (+ 1 (damp-count (/ m 2)))))
-  (fixed-point ((repeated average-damp (damp-count n))
+;; 8乗根が何回で収束するか調べる
+(n-root-test 256 8 2)                   ; 2回で収束しない
+(n-root-test 256 8 3)                   ; 3回で収束
+
+;; 15乗根が何回で収束するか調べる
+(n-root-test 32768 15 3)                ; 3回で収束
+
+;; 16乗根が何回で収束するか調べる
+(n-root-test 65536 16 3)                ; 3回で収束しない
+(n-root-test 65536 16 4)                ; 4回で収束
+
+;; n 乗根を計算するのに必要な平均緩和の回数は log_2(n) 回
+(define (n-root x n)
+  (fixed-point ((repeated average-damp (floor (log n 2)))
                 (lambda (y) (/ x (expt y (- n 1)))))
                1.0))
 
-(n-root 4 2)
-(n-root 16 2)
-(n-root 6 8)
+(n-root 65536 16)
+;; => 2.000000000076957
