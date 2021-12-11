@@ -58,3 +58,22 @@
            (lambda (i) 1.0)
            12)
 ;; => 0.6180257510729613
+
+;; È¿Éü¥×¥í¥»¥¹
+(define (cont-frac n d k)
+  (define (cont-frac-iter i result)
+    (if (= i 0)
+        result
+        (cont-frac-iter (- i 1) (/ (n i)
+                                   (+ (d i) result)))))
+  (cont-frac-iter k 0.0))
+
+(cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           11)
+;; => 0.6180555555555556
+
+(cont-frac (lambda (i) 1.0)
+           (lambda (i) 1.0)
+           12)
+;; => 0.6180257510729613

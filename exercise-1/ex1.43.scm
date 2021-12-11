@@ -1,5 +1,3 @@
-;; ex1.43.scm
-
 (define (compose f g)
   (lambda (x) (f (g x))))
 
@@ -12,6 +10,6 @@
 
 (define (cube x) (* x x x))
 
-(print ((repeated square 2) 5))
-(print ((repeated square 1) 5))
-(print ((repeated cube 2) 2))
+((repeated square 2) 5)
+((repeated square 1) 5)
+((repeated cube 2) 2)

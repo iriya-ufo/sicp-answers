@@ -1,25 +1,27 @@
-;; ex1.39.scm
-
-(define (accumulate-rec combiner null-value term a next b)
-  (if (> a b)
-      null-value
-      (combiner (term a)
-		(accumulate-rec combiner null-value term (next a) next b))))
+(use math.const)
 
 (define (cont-frac n d k)
-  (define (combiner x cf)
-    (/ (n x) (+ (d x) cf)))
-  (define (term i) i)
-  (define (next i) (+ i 1))
-  (accumulate-rec combiner (/ (n k) (d k)) term 1 next (- k 1)))
+  (if (= k 0)
+      0
+      (/ (n 1)
+         (+ (d 1) (cont-frac (lambda (i) (n (+ i 1)))
+                             (lambda (i) (d (+ i 1)))
+                             (- k 1))))))
 
 (define (tan-cf x k)
-  (let ((tanx (cont-frac (lambda (i) (* -1 (* x x)))
-			 (lambda (i) (- (* 2 i) 1))
-			 k)))
-    (* -1 (/ tanx x))))
+  (let ((tan-num-x (cont-frac (lambda (i) (* -1 (* x x)))
+                              (lambda (i) (- (* 2 i) 1))
+                              k)))
+    (* -1 (/ tan-num-x x))))
 
-(print (tan-cf (/ 3.14159265 4) 2))
-(print (tan-cf (/ 3.14159265 4) 3))
-(print (tan-cf (/ 3.14159265 4) 4))
-(print (tan-cf (/ 3.14159265 4) 5))
+(tan-cf (/ pi 4) 2)
+;; => 0.9886892399342051
+
+(tan-cf (/ pi 4) 3)
+;; => 0.9997876809149684
+
+(tan-cf (/ pi 4) 4)
+;; => 0.9999978684156948
+
+(tan-cf (/ pi 4) 5)
+;; => 0.999999986526355

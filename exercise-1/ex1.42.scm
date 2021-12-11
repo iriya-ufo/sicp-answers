@@ -1,10 +1,11 @@
-;; ex1.42.scm
-
 (define (square x) (* x x))
 (define (inc x) (+ x 1))
 
 (define (compose f g)
   (lambda (x) (f (g x))))
 
-(print ((compose square inc) 6))
-(print ((compose inc square) 6))
+((compose square inc) 6)
+;; => 49
+
+((compose inc square) 6)
+;; => 37
