@@ -1,22 +1,20 @@
-;; ex2.01.scm
-
 (define (add-rat x y)
   (make-rat (+ (* (numer x) (denom y))
-	       (* (numer y) (denom x)))
-	    (* (denom x) (denom y))))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
 
 (define (sub-rat x y)
   (make-rat (- (* (numer x) (denom y))
-	       (* (numer y) (denom x)))
-	    (* (denom x) (denom y))))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
 
 (define (mul-rat x y)
   (make-rat (* (numer x) (numer y))
-	    (* (denom x) (denom y))))
+            (* (denom x) (denom y))))
 
 (define (div-rat x y)
   (make-rat (* (numer x) (denom y))
-	    (* (denom x) (numer y))))
+            (* (denom x) (numer y))))
 
 (define (equal-rat? x y)
   (= (* (numer x) (denom y))
@@ -32,17 +30,15 @@
   (display (denom x))
   (newline))
 
-
-;; 負の数を扱えるようmake-ratの改良
-
+;; improved make-rat
 (define (make-rat n d)
-  (let ((cfn (abs n))
-        (cfd (abs d)))
-    (let ((g (gcd cfn cfd)))
-      (cons (if (negative? (* n d))
-                (* -1 (/ cfn g))
-                (/ cfn g))
-            (/ cfd g)))))
+  (let ((abs-n (abs n))
+        (abs-d (abs d))
+        (g (gcd n d)))
+    (cons (if (negative? (* n d))
+              (* -1 (/ abs-n g))
+              (/ n g))
+          (/ d g))))
 
 (define -one-half (make-rat -1 2))
 (print-rat -one-half)
