@@ -25,12 +25,10 @@
 (define p1 (make-point 0 0))
 (define p2 (make-point 1 1))
 (define seg1 (make-segment p1 p2))
-(print-point seg1)
-;; => ((1 . 2),(3 . 8))
-
 (print-point (midpoint-segment seg1))
 
 ;; test p3 p4
 (define p3 (make-point 1 1))
 (define p4 (make-point 3 5))
+(define seg2 (make-segment p3 p4))
 (print-point (midpoint-segment seg2))
