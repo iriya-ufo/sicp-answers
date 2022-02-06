@@ -5,6 +5,7 @@
 
 (define one (lambda (f) (lambda (x) (f x))))
 (define two (lambda (f) (lambda (x) (f (f x)))))
+(define three (lambda (f) (lambda (x) (f (f (f x))))))
 
 (add-1 zero)
 ; =>
@@ -54,42 +55,24 @@
 
 (((add-2 zero) inc) 10)
 
+;; + の定義
+(define (plus n m)
+  (lambda (f) (lambda (x) ((m f) ((n f) x)))))
 
+(((plus zero two) inc) 0)
+;; => 2
+(((plus two one) inc) 0)
+;; => 3
+(((plus three two) inc) 0)
+;; => 5
 
+;; * の定義
+(define (mul n m)
+  (lambda (f) (lambda (x) ((m (n f)) x))))
 
-
-;; (((add-1 zero) inc) 0)
-;; (((add-1 zero) inc) 1)
-
-;; ;; (add-1 zero)の置換え
-
-;; ;; (add-1 (lambda (f) (lambda (x) x)))
-;; ;; (lambda (f) (lambda (x) (f (((lambda (f) (lambda (x) x)) f) x))))
-;; ;; (lambda (f) (lambda (x) (f x)))
-
-
-;; (define one (lambda (f) (lambda (x) (f x))))
-;; ((one inc) 0)
-
-;; (define two (lambda (f) (lambda (x) (f (f x)))))
-;; ((two inc) 0)
-
-;; (define three (lambda (f) (lambda (x) (f (f (f x))))))
-;; ((three inc) 0)
-
-;; ;; + の定義
-
-;; (define (add n1 n2)
-;;   (lambda (f) (lambda (x) ((n2 f) ((n1 f) x)))))
-
-;; (print (((add two one) inc) 0))
-;; (print (((add three two) inc) 0))
-
-
-;; ;; * の定義
-
-;; (define (mul n1 n2)
-;;   (lambda (f) (lambda (x) ((n1 (n2 f)) x))))
-
-;; (print (((mul one two) inc) 0))
-;; (print (((mul three two) inc) 0))
+(((mul zero two) inc) 0)
+;; => 0
+(((mul one two) inc) 0)
+;; => 2
+(((mul three two) inc) 0)
+;; => 6
