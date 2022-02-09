@@ -16,11 +16,13 @@
           (else #f)))
   (all-check 2 n))
 
-(fermat-test-with-carmichael 9)
-(fermat-test-with-carmichael 17)
-(fermat-test-with-carmichael 561)
-(fermat-test-with-carmichael 1105)
-(fermat-test-with-carmichael 1729)
-(fermat-test-with-carmichael 2465)
-(fermat-test-with-carmichael 2821)
-(fermat-test-with-carmichael 6601)
+(fermat-test-with-carmichael 17)    ; => #t
+(fermat-test-with-carmichael 500)   ; => #f
+
+;; Carmichael number test
+(fermat-test-with-carmichael 561)   ; => #t
+(fermat-test-with-carmichael 1105)  ; => #t
+(fermat-test-with-carmichael 1729)  ; => #t
+(fermat-test-with-carmichael 2465)  ; => #t
+(fermat-test-with-carmichael 2821)  ; => #t
+(fermat-test-with-carmichael 6601)  ; => #t
