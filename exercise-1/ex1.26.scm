@@ -1,5 +1,3 @@
-;; ex1.26.scm
-
 (use srfi-19)
 (use srfi-27)
 
@@ -52,10 +50,14 @@
   (display (search-for-primes n 1))
   (newline))
 
-(search 1000)
-(search 10000)
-(search 100000)
+;; Louis Program
 (search 1000000)
+;; 1000001
+;; 1000003 *** #<time-duration 2.790220000>
+;; done
 
-;; Louis のプログラムは expmod 手続きにおいて乗算を使用しているため、
-;; Θ(log n) プロセスを Θ(Φ^(log n)) つまり Θ(n) のプロセスにしてしまった。
+;; Square Program
+(search 1000000)
+;; 1000001
+;; 1000003 *** #<time-duration 0.000046000>
+;; done
