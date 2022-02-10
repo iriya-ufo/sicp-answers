@@ -12,8 +12,8 @@
                (remainder (square x) m)))))
   (cond ((= exp 0) 1)
         ((even? exp) (non-trivial-sqrt-check (expmod base (/ exp 2) m)))
-	      (else (remainder (* base (expmod base (- exp 1) m))
-		                     m))))
+        (else (remainder (* base (expmod base (- exp 1) m))
+                         m))))
 
 (define (miller-rabin-test n)
   (define (try-it a)
@@ -25,16 +25,15 @@
         ((miller-rabin-test n) (fast-prime? n (- times 1)))
         (else #f)))
 
-;; 20回、試行する
+;; 20回試行する
 (define (prime? n)
   (fast-prime? n 20))
 
-(prime? 13)   ;; => #t
-(prime? 561)  ;; => #f
-(prime? 1105) ;; => #f
-(prime? 1729) ;; => #f
-(prime? 2465) ;; => #f
-(prime? 2821) ;; => #f
-(prime? 6601) ;; => #f
+(prime? 561)   ; => #f
+(prime? 1105)  ; => #f
+(prime? 1729)  ; => #f
+(prime? 2465)  ; => #f
+(prime? 2821)  ; => #f
+(prime? 6601)  ; => #f
 
 ;; フェルマーテストをだましたカーマイケル数が、ミラーラビンテストはだませなかったことが示された
