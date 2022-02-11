@@ -10,11 +10,11 @@
 (define (factorial n)
   (product identity 1 inc n))
 
-(factorial 1) ;; => 1
-(factorial 2) ;; => 2
-(factorial 3) ;; => 6
-(factorial 4) ;; => 24
-(factorial 5) ;; => 120
+(factorial 1)  ; => 1
+(factorial 2)  ; => 2
+(factorial 3)  ; => 6
+(factorial 4)  ; => 24
+(factorial 5)  ; => 120
 
 ;; 両辺に2を掛けた形で計算する
 (define (wallis-formula a b)
@@ -24,7 +24,9 @@
   (product term a inc b))
 
 (* 2 (wallis-formula 1.0 1000.0))
+;; => 0.001569619063483441
 
+;; 問題にある公式通りに計算する
 (define (wallis-formula a b)
   (define (term x)
     (/ (* (* 2 x) (* 2 (+ x 1)))
@@ -32,6 +34,7 @@
   (product term a inc b))
 
 (* 4 (wallis-formula 1.0 1000.0))
+;; => 3.142377365093882
 
 ;; b.
 (define (product term a next b)
