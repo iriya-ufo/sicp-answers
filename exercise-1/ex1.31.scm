@@ -16,7 +16,7 @@
 (factorial 4)  ; => 24
 (factorial 5)  ; => 120
 
-;; 両辺に2を掛けた形で計算する
+;; ウォリスの公式
 (define (wallis-formula a b)
   (define (term x)
     (square (/ (* 2 x)
@@ -26,7 +26,7 @@
 (* 2 (wallis-formula 1.0 1000.0))
 ;; => 0.001569619063483441
 
-;; 問題にある公式通りに計算する
+;; ウォリスの公式を式変形した問題に記載の公式
 (define (wallis-formula a b)
   (define (term x)
     (/ (* (* 2 x) (* 2 (+ x 1)))
