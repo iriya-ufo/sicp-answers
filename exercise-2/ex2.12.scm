@@ -13,3 +13,6 @@
   (make-center-width c (/ (* c p) 100.0)))
 (define (percent i)
   (* (/ (width i) (center i)) 100.0))
+
+(make-center-percent 50 10)
+;; => (45.0 . 55.0)
