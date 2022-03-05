@@ -56,7 +56,7 @@
 
 (percent (par1 A B))         ; => 0.433331000014004
 (percent (par2 A B))         ; => 0.16666673333345916
-;; 一方で par1, par2 の percent の結果は差異が大きくなってきた
+;; par1, par2 の percent の結果は差異が大きくなっているように見えるが percent なので 1/100 するとそれほど大きな差異はない
 
 (center (div-interval A A))  ; => 1.000002000002
 (center (div-interval A B))  ; => 2.000012000048
@@ -64,4 +64,4 @@
 
 (percent (div-interval A A)) ; => 0.199999800000211
 (percent (div-interval A B)) ; => 0.29999940000119574
-;; 一方で A/A, A/B の percent の結果はやはり誤差がでている
+;; A/A, A/B の percent の結果は差異が大きくなっているように見えるが percent なので 1/100 するとそれほど大きな差異はない
