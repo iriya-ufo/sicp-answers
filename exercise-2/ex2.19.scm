@@ -24,11 +24,17 @@
   (null? coin-values))
 
 (cc 100 us-coins)
+;; => 292
+
 (cc 20 uk-coins)
-(cc 20 jp-coins)
+;; => 293
+
+(cc 100 jp-coins)
+;; => 159
 
 (define us-coins2 '(10 5 1 25 50))
 (cc 100 us-coins2)
+;; => 292
 
 ;; cc の答えにリスト coin-values の順番は影響をあたえない
 ;; 順番がかわっても評価させる硬貨が区別できればよいアルゴリズムだからである
