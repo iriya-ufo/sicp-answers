@@ -1,5 +1,3 @@
-;; ex2.22.scm
-
 (define (square-list-1 items)
   (define (iter things answer)
     (if (null? things)

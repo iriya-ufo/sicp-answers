@@ -1,5 +1,3 @@
-;; ex2.21.scm
-
 (define (square x) (* x x))
 
 (define (square-list items)
