@@ -1,7 +1,3 @@
-;; ex2.30.scm
-
-(define (square x) (* x x))
-
 (define (square-tree tree)
   (cond ((null? tree) '())
         ((not (pair? tree)) (square tree))
@@ -12,7 +8,6 @@
  (list 1
        (list 2 (list 3 4) 5)
        (list 6 7)))
-
 
 (define (square-tree-with-map tree)
   (map (lambda (sub-tree)
