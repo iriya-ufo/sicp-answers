@@ -1,5 +1,3 @@
-;; ex2.31.scm
-
 (define (tree-map proc tree)
   (cond ((null? tree) '())
         ((not (pair? tree)) (proc tree))
