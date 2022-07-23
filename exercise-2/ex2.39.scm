@@ -1,11 +1,9 @@
-;; ex2.39.scm
-
 (define (fold-left op initial sequence)
   (define (iter result rest)
     (if (null? rest)
-	result
-	(iter (op result (car rest))
-	      (cdr rest))))
+        result
+        (iter (op result (car rest))
+              (cdr rest))))
   (iter initial sequence))
 
 (define (reverse-right sequence)
@@ -13,5 +11,5 @@
 (reverse-right '(1 2 3 4 5))
 
 (define (reverse-left sequence)
-  (fold-left (lambda (x y) (cons y x)) '() sequence))
+  (fold-left (lambda (x y) (append (list y) x)) '() sequence))
 (reverse-left '(1 2 3 4 5))
