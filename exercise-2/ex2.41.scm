@@ -10,10 +10,17 @@
 (define (unique-triples n)
   (flatmap
    (lambda (i)
-     (map (lambda (j) (list i j))
+     (map (lambda (j)
+            (map (lambda (k) (list i j k))
+                 (iota (- j 2) 1)))
           (iota (- i 1) 1)))
    (iota n 1)))
 
-(unique-triples 3)
+(unique-triples 4)
 
-(unique-pairs 4)
+(flatmap (lambda (i)
+           (flatmap (lambda (j)
+                      (map (lambda (k) (list i j k))
+                           (iota (- j 1) 1)))
+                    (iota (- i 1) 1)))
+         (iota 5 1))
