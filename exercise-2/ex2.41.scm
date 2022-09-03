@@ -8,19 +8,19 @@
   (accumulate append '() (map proc seq)))
 
 (define (unique-triples n)
-  (flatmap
-   (lambda (i)
-     (map (lambda (j)
-            (map (lambda (k) (list i j k))
-                 (iota (- j 2) 1)))
-          (iota (- i 1) 1)))
-   (iota n 1)))
+  (flatmap (lambda (i)
+             (flatmap (lambda (j)
+                        (map (lambda (k) (list i j k))
+                             (iota (- j 1) 1)))
+                      (iota (- i 1) 1)))
+           (iota n 1)))
 
 (unique-triples 4)
+;; => ((3 2 1) (4 2 1) (4 3 1) (4 3 2))
 
-(flatmap (lambda (i)
-           (flatmap (lambda (j)
-                      (map (lambda (k) (list i j k))
-                           (iota (- j 1) 1)))
-                    (iota (- i 1) 1)))
-         (iota 5 1))
+(define (s-sum-triples s n)
+  (filter (lambda (seq) (= (accumulate + 0 seq) s))
+          (unique-triples n)))
+
+(s-sum-triples 6 4)
+;; => ((3 2 1))
