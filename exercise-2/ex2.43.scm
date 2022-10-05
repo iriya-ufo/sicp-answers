@@ -76,3 +76,6 @@
 
 (queens 3)
 (slow-queens 3)
+
+;; cf.
+;; http://community.schemewiki.org/?sicp-ex-2.43
