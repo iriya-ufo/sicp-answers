@@ -20,3 +20,4 @@
         (make-segment (make-vect 0 0.5) (make-vect 0.5 0))))
 
 ;; d.
+;; skip
