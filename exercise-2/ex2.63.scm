@@ -47,11 +47,31 @@
                         (make-tree 7 '() '())
                         (make-tree 11 '() '()))))
 
-(tree->list-1 tree1)
-(tree->list-2 tree1)
+(define tree4
+  (make-tree 1
+             '()
+             (make-tree 2
+                        '()
+                        (make-tree 3
+                                   '()
+                                   (make-tree 4
+                                              '()
+                                              (make-tree 5
+                                                         '()
+                                                         (make-tree 6
+                                                                    '()
+                                                                    (make-tree 7
+                                                                               '()
+                                                                               '()))))))))
 
-(tree->list-1 tree2)
-(tree->list-2 tree2)
+(tree->list-1 tree1)                    ; => (1 3 5 7 9 11)
+(tree->list-2 tree1)                    ; => (1 3 5 7 9 11)
 
-(tree->list-1 tree3)
-(tree->list-2 tree3)
+(tree->list-1 tree2)                    ; => (1 3 5 7 9 11)
+(tree->list-2 tree2)                    ; => (1 3 5 7 9 11)
+
+(tree->list-1 tree3)                    ; => (1 3 5 7 9 11)
+(tree->list-2 tree3)                    ; => (1 3 5 7 9 11)
+
+(tree->list-1 tree4)                    ; => (1 2 3 4 5 6 7)
+(tree->list-2 tree4)                    ; => (1 2 3 4 5 6 7)
