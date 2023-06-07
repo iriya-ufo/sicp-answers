@@ -45,5 +45,9 @@
 
 (define (successive-merge leaf-set)
   (if (= (length leaf-set) 1)
-      huffman-tree
-      ))
+      (car leaf-set)
+      (successive-merge (adjoin-set (make-code-tree (car leaf-set)
+                                                    (cadr leaf-set))
+                                    (cddr leaf-set)))))
+
+(generate-huffman-tree pairs)
