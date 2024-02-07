@@ -41,7 +41,7 @@
               (* (denom x) (numer y))))
   (define (equ?-rat x y)
     ;; 真偽値を返せばよいので make-rat はいらない
-    (and (= (number x) (number y))
+    (and (= (numer x) (numer y))
          (= (denom x) (denom y))))
   ;; システムのほかの部分とのインターフェイス
   (define (tag x) (attach-tag 'rational x))
