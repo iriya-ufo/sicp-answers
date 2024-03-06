@@ -36,3 +36,7 @@
                              (apply-generic op a1 (t2->t1 a2)))
                             (else (no-method type-tags))))))
               (no-method type-tags))))))
+
+;; 疑問点
+;; 型が同じだったときにエラーで落とすのであれば Louis の自身への型変換手続きは呼ばれないはず
+;; なぜ Louis の自身への型変換手続きを定義すべきなのだろうか
