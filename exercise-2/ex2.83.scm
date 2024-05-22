@@ -1,15 +1,11 @@
 (define (raise x)
   (apply-generic 'raise x))
 
-(define (raise-int n)
-  (make-rational n 1))
+(put 'raise 'integer
+     (lambda (x) (make-rational x 1)))
 
-(define (raise-rational r)
-  (attach-tag 'scheme-number (/ (numer r) (denom r))))
+(put 'raise 'rational
+     (lambda (x) (make-real (* 1.0 (/ (numer x) (denom x))))))
 
-(define (raise-real x)
-  (make-from-real-imag x 0))
-
-(put 'raise 'integer (lambda (x) (raise-int x)))
-(put 'raise 'rational (lambda (x) (raise-rational x)))
-(put 'raise 'real (lambda (x) (raise-real x)))
+(put 'raise 'real
+     (lambda (x) (make-from-real-imag x 0)))
