@@ -1,7 +1,9 @@
 (define (equ? x y) (apply-generic 'equ? x y))
 (define (project x) (apply-generic 'project x))
 (define (drop x)
-  )
+  (if (eq? x (raise (project x)))
+      (drop (project x))
+      x))
 
 ;;; 実数
 (define (install-scheme-number-package)
@@ -110,3 +112,21 @@
   (put 'make-from-mag-ang 'complex
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done)
+
+;;; apply-generic
+(define (apply-generic op . args)
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+          (apply proc (map contents args))
+          (if (= (length args) 2)
+              (let ((type1 (car type-tags))
+                    (type2 (cadr type-tags))
+                    (a1 (drop (car args)))  ; a1 を可能なだけ下げる
+                    (a2 (drop (cadr args))) ; a2 を可能なだけ下げる
+                    (diff (sub-nest (car type-tags) (cadr type-tags))))
+                (cond ((> diff 0) (apply-generic op (raise a1) a2))
+                      ((< diff 0) (apply-generic op a1 (raise a2)))
+                      (else       (apply-generic op a1 a2))))
+              (error "No method for these types"
+                     (list op type-tags)))))))
