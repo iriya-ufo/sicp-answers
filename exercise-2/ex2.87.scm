@@ -17,7 +17,16 @@
        (lambda (p1 p2) (tag (add-poly p1 p2))))
   (put 'mul '(polynomial polynomial)
        (lambda (p1 p2) (tag (mul-poly p1 p2))))
-  (put 'zero?-polynomial p)
+  (define (=zero-poly? p)
+    (let ((terms (term-list p)))
+      (define (=zero-terms? terms)
+        (if (empty-termlist? terms)
+            #t
+            (if (=zero? (coeff (first-term terms)))
+                (=zero-terms? (rest-terms terms))
+                #f)))
+      (=zero-terms? terms)))
+  (put '=zero? '(polynomial) (lambda (p) (=zero-poly? p)))
   (put 'make 'polynomial
        (lambda (var terms) (tag (make-poly var terms))))
   'done)
